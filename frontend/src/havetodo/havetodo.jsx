@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 
+import PageHeader from '../template/pageHeader'
+
 export default class haveTodo extends Component {
     render() {
         return (
             <div>
-                <h1>haveTodo</h1>
+                <PageHeader name='Tasks' small='Register' />
             </div>
         )
     }
