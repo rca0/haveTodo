@@ -15,6 +15,18 @@ export default class haveTodo extends Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.handleAdd = this.handleAdd.bind(this)
+        this.handleRemove = this.handleRemove.bind(this)
+
+        this.refresh()
+    }
+
+    refresh() {
+        Axios.get(`${URL}?sort=-createAt`)
+            .then(resp => this.setState({
+                ...this.state,
+                description: '',
+                list: resp.data
+            }))
     }
 
     handleChange(evt) {
@@ -27,7 +39,12 @@ export default class haveTodo extends Component {
     handleAdd() {
         let description = this.state.description
         Axios.post(URL, { description })
-            .then(resp => console.log('ok'))
+            .then(resp => this.refresh())
+    }
+
+    handleRemove(todo) {
+        Axios.delete(`${URL}/${todo._id}`)
+            .then(resp => this.refresh())
     }
 
     render() {
@@ -38,7 +55,9 @@ export default class haveTodo extends Component {
                     description={this.state.description}
                     handleChange={this.handleChange}
                     handleAdd={this.handleAdd} />
-                <TodoList />
+                <TodoList
+                    list={this.state.list}
+                    handleRemove={this.handleRemove} />
             </div>
         )
     }
