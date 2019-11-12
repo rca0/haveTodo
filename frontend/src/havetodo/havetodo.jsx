@@ -25,7 +25,7 @@ export default class haveTodo extends Component {
     }
 
     refresh(description = '') {
-        const search = description ? `&description__regex=/${description}` : ''
+        const search = description ? `&description__regex=${description}` : ''
 
         Axios.get(`${URL}?sort=-createAt${search}`)
             .then(resp => this.setState({
