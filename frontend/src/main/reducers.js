@@ -1,18 +1,8 @@
 import { combineReducers } from 'redux'
+import havetodoReducer from '../havetodo/havetodoReducer'
 
 const rootReducer = combineReducers({
-    todo: () => ({
-        description: 'Read book',
-        list: [{
-            _id: 1,
-            description: 'Pay credit card',
-            done: true
-        }, {
-            _id: 2,
-            description: 'Meeting with squad',
-            done: false
-        }]
-    })
+    todo: havetodoReducer
 })
 
 export default rootReducer
